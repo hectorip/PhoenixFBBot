@@ -20,7 +20,9 @@ defmodule Bot.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", Bot do
-  #   pipe_through :api
-  # end
+  scope "/api", Bot do
+    pipe_through :api
+
+    get "/facebook_webhook", FacebookController, :webhook
+  end
 end
