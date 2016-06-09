@@ -1,7 +1,9 @@
 defmodule Bot.FacebookController do
   use Bot.Web, :controller
 
-  def index(conn, _params) do
+  def webhook(conn, params = %{"hub.challenge" => token}) do
+
     render conn, "index.html"
   end
+
 end
