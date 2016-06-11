@@ -11,7 +11,19 @@ defmodule Bot.FacebookController do
       _ ->             text conn, "Wrong"
     end
   end
-
   def webhook(conn, _), do: text conn, "I have no response for this"
+
+  def handle_message(conn, params = %{"entry" => entry}) do
+      %{"id" => _, "messaging" => messaging} = hd(entry)
+
+      messaging
+      |> Enum.each(&__MODULE__.response_message/1)
+      # Responding each message
+
+      text conn, "Responding Message"
+  end
+
+  def response_message(message)
+
 
 end
