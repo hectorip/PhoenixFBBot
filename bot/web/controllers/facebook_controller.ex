@@ -12,4 +12,6 @@ defmodule Bot.FacebookController do
     end
   end
 
+  def webhook(conn, _), do: text conn, "I have no response for this"
+
 end
