@@ -33,9 +33,7 @@ defmodule Bot.MessageHandler do
         }
       }
     }
-    url = "https://graph.facebook.com/v2.6/me/messages?access_token=#{@fb_page_access_token}"
-    headers = [{"Content-type", "application/json"}]
-    HTTPoison.post! url, Poison.encode!(payload), headers
+    send_message payload
   end
 
   def send_text_message(recipient, message) do
@@ -45,12 +43,13 @@ defmodule Bot.MessageHandler do
         text: message
       }
     }
-    url = "https://graph.facebook.com/v2.6/me/messages?access_token=#{@fb_page_access_token}"
-    headers = [{"Content-type", "application/json"}]
-    HTTPoison.post! url, Poison.encode!(payload), headers
+    send_message payload
   end
 
-  def send_message() do
-    IO.puts "sending"
+  def send_message(message) do
+    IO.puts "Sending message"
+    url = "https://graph.facebook.com/v2.6/me/messages?access_token=#{@fb_page_access_token}"
+    headers = [{"Content-type", "application/json"}]
+    HTTPoison.post! url, Poison.encode!(message), headers
   end
 end
