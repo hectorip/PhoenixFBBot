@@ -3,7 +3,6 @@ defmodule Bot.MessageHandler do
   @fb_page_access_token System.get_env("FB_PAGE_ACCESS_TOKEN")
 
   def handle(msg = %{"message" => %{"text" => _text}}) do
-    # do something with the text
     buttons = [
       %{type: "web_url", title: "hectoripm.com", url: "http://hectoripm.com"},
       %{type: "postback", title: "Héctor Iván Patricio Moreno", payload: "PB_NAME"}
@@ -36,7 +35,7 @@ defmodule Bot.MessageHandler do
     }
     url = "https://graph.facebook.com/v2.6/me/messages?access_token=#{@fb_page_access_token}"
     headers = [{"Content-type", "application/json"}]
-    IO.inspect(HTTPoison.post! url, Poison.encode!(payload), headers)
+    HTTPoison.post! url, Poison.encode!(payload), headers
   end
 
   def send_text_message(recipient, message) do
@@ -48,6 +47,10 @@ defmodule Bot.MessageHandler do
     }
     url = "https://graph.facebook.com/v2.6/me/messages?access_token=#{@fb_page_access_token}"
     headers = [{"Content-type", "application/json"}]
-    IO.inspect(HTTPoison.post! url, Poison.encode!(payload), headers)
+    HTTPoison.post! url, Poison.encode!(payload), headers
+  end
+
+  def send_message() do
+    IO.puts "sending"
   end
 end
