@@ -11,9 +11,11 @@ defmodule Bot.MessageHandler do
     IO.inspect msg
     send_button_message msg["sender"]["id"], "Escoge una de las siguientes opciones", buttons
   end
+
   def handle(msg = %{"postback" => %{"payload"=> "PB_NAME"}}) do
-    send_text_message msg["sender"]["recipient"], "Me llamo Héctor Patricio"
+    send_text_message msg["sender"]["id"], "Me llamo Héctor Patricio"
   end
+
   def handle(msg) do
     Logger.info "I don't know how to handle this message: \n#{inspect msg}"
   end
