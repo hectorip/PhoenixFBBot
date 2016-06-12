@@ -11,7 +11,9 @@ defmodule Bot.MessageHandler do
     IO.inspect msg
     send_button_message msg["sender"]["id"], "Escoge una de las siguientes opciones", buttons
   end
-
+  def handle(msg = %{"postback" => %{"payload"=> "PB_NAME"}}) do
+    send_text_message msg["sender"]["recipient"], "Me llamo Héctor Patricio"
+  end
   def handle(msg) do
     Logger.info "I don't know how to handle this message: \n#{inspect msg}"
   end
@@ -30,7 +32,18 @@ defmodule Bot.MessageHandler do
         }
       }
     }
+    url = "https://graph.facebook.com/v2.6/me/messages?access_token=#{@fb_page_access_token}"
+    headers = [{"Content-type", "application/json"}]
+    IO.inspect(HTTPoison.post! url, Poison.encode!(payload), headers)
+  end
 
+  def send_text_message(recipient, message) do
+    payload = %{
+      recipient: %{id: recipient},
+      message: %{
+        text: message
+      }
+    }
     url = "https://graph.facebook.com/v2.6/me/messages?access_token=#{@fb_page_access_token}"
     headers = [{"Content-type", "application/json"}]
     IO.inspect(HTTPoison.post! url, Poison.encode!(payload), headers)
