@@ -22,8 +22,15 @@ defmodule Bot.FacebookController do
 
       text conn, "Responding Message"
   end
+  def handle_message(conn, params = %{"entry" => entry}) do
+      %{"id" => _, "messaging" => messaging} = hd(entry)
 
-  def response_message(message)
+      messaging
+      |> Enum.each(&Bot.MessageHandler.handle/1)
+      # Responding each message
+
+      text conn, "Responding Message"
+  end
 
 
 end

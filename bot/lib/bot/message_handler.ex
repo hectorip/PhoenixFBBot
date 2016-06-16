@@ -6,13 +6,18 @@ defmodule Bot.MessageHandler do
     buttons = [
       %{type: "web_url", title: "hectoripm.com", url: "http://hectoripm.com"},
       %{type: "postback", title: "Héctor Iván Patricio Moreno", payload: "PB_NAME"}
+      %{type: "postback", title: "About Swiftly", payload: "swiftly_info"}
     ]
     IO.inspect msg
     send_button_message msg["sender"]["id"], "Escoge una de las siguientes opciones", buttons
   end
-
+  # postbacks messages carry the "postback" parameter with a pyload 
   def handle(msg = %{"postback" => %{"payload"=> "PB_NAME"}}) do
     send_text_message msg["sender"]["id"], "Me llamo Héctor Patricio"
+  end
+
+   def handle(msg = %{"postback" => %{"payload"=> "swiftly_info"}}) do
+    send_text_message msg["sender"]["id"], "Swiftly is great."
   end
 
   def handle(msg) do
