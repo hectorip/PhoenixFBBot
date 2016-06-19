@@ -52,7 +52,7 @@ defmodule Bot.MessageHandler do
   end
 
   def send_message(message) do
-    IO.puts "Sending message"
+    IO.puts "Sending message :o"
     url = "https://graph.facebook.com/v2.6/me/messages?access_token=#{@fb_page_access_token}"
     headers = [{"Content-type", "application/json"}]
     HTTPoison.post! url, Poison.encode!(message), headers
