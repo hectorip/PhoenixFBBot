@@ -5,7 +5,7 @@ defmodule Bot.MessageHandler do
   def handle(msg = %{"message" => %{"text" => _text}}) do
     buttons = [
       %{type: "web_url", title: "hectoripm.com", url: "http://hectoripm.com"},
-      %{type: "postback", title: "Héctor Iván Patricio Moreno", payload: "PB_NAME"},
+      # %{type: "postback", title: "Héctor Iván Patricio Moreno", payload: "PB_NAME"},
       %{type: "postback", title: "About Swiftly", payload: "swiftly_info"}
     ]
     IO.inspect msg
