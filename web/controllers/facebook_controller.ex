@@ -1,6 +1,6 @@
 defmodule Bot.FacebookController do
   use Bot.Web, :controller
-  @verify_token "this_is_my_awesome_token"
+  @verify_token System.get_env("FACEBOOK_VERIFICATION_TOKEN")
 
   def webhook(conn, %{
     "hub.verify_token" => verify_token,
@@ -13,7 +13,7 @@ defmodule Bot.FacebookController do
   end
   def webhook(conn, _), do: text conn, "I have no response for this"
 
-  def handle_message(conn, params = %{"entry" => entry}) do
+  def handle_message(conn, _params = %{"entry" => entry}) do
       %{"id" => _, "messaging" => messaging} = hd(entry)
 
       messaging
@@ -22,15 +22,5 @@ defmodule Bot.FacebookController do
 
       text conn, "Responding Message"
   end
-  def handle_message(conn, params = %{"entry" => entry}) do
-      %{"id" => _, "messaging" => messaging} = hd(entry)
-
-      messaging
-      |> Enum.each(&Bot.MessageHandler.handle/1)
-      # Responding each message
-
-      text conn, "Responding Message"
-  end
-
 
 end
