@@ -1,11 +1,11 @@
 defmodule Bot.MessageHandler do
   require Logger
   @fb_page_access_token System.get_env("FB_PAGE_ACCESS_TOKEN")
+  @fb_page "https://graph.facebook.com/v2.6/me/messages?access_token="
 
   def handle(msg = %{"message" => %{"text" => _text}}) do
     buttons = [
       %{type: "web_url", title: "hectoripm.com", url: "http://hectoripm.com"},
-      # %{type: "postback", title: "Héctor Iván Patricio Moreno", payload: "PB_NAME"},
       %{type: "postback", title: "About Swiftly", payload: "swiftly_info"}
     ]
     IO.inspect msg
@@ -53,7 +53,7 @@ defmodule Bot.MessageHandler do
 
   def send_message(message) do
     IO.puts "Sending message :o"
-    url = "https://graph.facebook.com/v2.6/me/messages?access_token=#{@fb_page_access_token}"
+    url = @fb_page <> @fb_page_access_token
     IO.inspect url
     headers = [{"Content-type", "application/json"}]
     HTTPoison.post! url, Poison.encode!(message), headers

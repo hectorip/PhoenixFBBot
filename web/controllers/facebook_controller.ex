@@ -8,18 +8,16 @@ defmodule Bot.FacebookController do
   do
     case verify_token do
       @verify_token -> text conn, challenge
-      _ ->             text conn, "Wrong"
+      _ ->             text conn, "WRONG"
     end
   end
-  def webhook(conn, _), do: text conn, "I have no response for this"
+  def webhook(conn, _), do: text conn, "I have no idea of how to respond this"
 
   def handle_message(conn, _params = %{"entry" => entry}) do
       %{"id" => _, "messaging" => messaging} = hd(entry)
 
       messaging
       |> Enum.each(&Bot.MessageHandler.handle/1)
-      # Responding each message
-
       text conn, "Responding Message"
   end
 
