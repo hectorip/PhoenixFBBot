@@ -2,6 +2,7 @@ defmodule Bot.MessageHandler do
   require Logger
   @fb_page_access_token System.get_env("FB_PAGE_ACCESS_TOKEN")
   @fb_page "https://graph.facebook.com/v2.6/me/messages?access_token="
+  IO.puts "@@@@@@@@@@@@@@@@@@@@@@@@@"
   IO.puts @fb_page_access_token
 
   def handle(msg = %{"message" => %{"text" => _text}}) do
