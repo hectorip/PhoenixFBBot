@@ -7,4 +7,7 @@ defmodule Bot.PageController do
   def contact(conn, params) do
     json conn, params
   end
+  def saludo(conn, %{"name" => name}) do
+    json conn, %{saludo: "Hola #{name}"}
+  end
 end

@@ -16,8 +16,9 @@ defmodule Bot.Router do
   scope "/", Bot do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
     post "/contact", PageController, :contact
+    get "/contact", PageController, :saludo
+    get "/", PageController, :index
 
   end
 
