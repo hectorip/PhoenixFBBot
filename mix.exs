@@ -37,7 +37,8 @@ defmodule Bot.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.9"},
      {:cowboy, "~> 1.0"},
-     {:httpoison, "~> 0.8.3"}
+     {:httpoison, "~> 0.8.3"},
+     {:cors_plug, "~> 0.1.4"}
    ]
   end
 
