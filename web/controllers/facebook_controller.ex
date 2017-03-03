@@ -1,5 +1,6 @@
 defmodule Bot.FacebookController do
   use Bot.Web, :controller
+  
   @verify_token System.get_env("FACEBOOK_VERIFICATION_TOKEN")
 
   def webhook(conn, %{
@@ -13,10 +14,16 @@ defmodule Bot.FacebookController do
       _ ->             text conn, "WRONG"
     end
   end
+
   def webhook(conn, _), do: text conn, "I have no idea of how to respond this"
-  def handle_message(conn, _params) do
+
+  def handle_message(conn, params) do
+
+      # I should send to different datastores the content
+      IO.inspect params
       text conn, "Responding Message"
   end
+
   # def handle_message(conn, _params = %{"entry" => entry}) do
   #     %{"id" => _, "messaging" => messaging} = hd(entry)
 
